@@ -1,13 +1,20 @@
 const productModel=require('../Models/productModel');
 
 exports.addNew=(req,res)=>{
-  //Ajouter le nouveau produit dans la base
-    const model=new productModel({
-      ...req.body
-    });
-   model.save()
-   .then(()=>res.status(200).send({message:"Enregistrement éffectué"}))
-   .catch((err)=>console.log(err));
+  if(req.body.nom||req.body.prix||req.body.nombre){
+
+    //Ajouter le nouveau produit dans la base
+      const model=new productModel({
+        ...req.body
+      });
+     model.save()
+     .then(()=>res.status(200).send({message:"Enregistrement éffectué"}))
+     .catch((err)=>console.log(err));
+
+  }else{
+    res.status(500).send({message:"Erreur d'enregistrement"});
+  }
+
 }
 
 exports.getAll=(req,res)=>{
