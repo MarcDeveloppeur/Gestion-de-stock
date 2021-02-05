@@ -1,5 +1,6 @@
 const express=require('express');
 const mongoose=require('mongoose');
+const cors=require('cors');
 const productRouter=require("./Routes/ProductRoutes");
 const app=express();
 
@@ -10,6 +11,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/todoBase')
 //les middlewares
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(cors({origin:'http://localhost:3000'}));
 
 //Les routeurs
 app.use('/product/',productRouter);
