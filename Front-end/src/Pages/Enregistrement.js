@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import './PageStyle/Enregistrement.css';
 import axios from 'axios';
 
@@ -9,6 +10,7 @@ function Enregistrement() {
     const [dispo,setDispo]=useState(false);
     const [message,setMessage]=useState('');
     const [messageClasse,setMessageClasse]=useState('');
+    const history=useHistory();
 
     const enregistrer=(e)=>{
       e.preventDefault();
@@ -23,6 +25,7 @@ function Enregistrement() {
         .then(()=>{
           setMessage('Enregistrement éfféctuée');
           setMessageClasse('success');
+          history.push('/');
       })
         .catch(()=>{
           setMessage('Erreur d\'enregistrement')
@@ -42,17 +45,21 @@ function Enregistrement() {
         <p className={messageClasse}>{message}</p>
 
         <form onSubmit={enregistrer}>
-           <input type="text" placeholder="Nom du produit" className="inputClass" value={nom} onChange={(e)=>setNom(e.target.value)}/><br/>
-           <input type="number" placeholder="Prix unitaire" min={0} className="inputClass" value={prix} onChange={(e)=>setPrix(e.target.value)}/><br/>
-           <input type="number" placeholder="Nombre" min={0} className="inputClass" value={nombre} onChange={(e)=>setNombre(e.target.value)}/><br/>
+           <label htmlFor="nom"><p>Nom du produit:</p></label>
+           <input type="text" id="nom"  className="inputClass" value={nom} onChange={(e)=>setNom(e.target.value)}/><br/>
+           <label htmlFor="prix"><p>Prix unitair (Ariary):</p></label>
+           <input type="number" id="prix"  min={0} className="inputClass" value={prix} onChange={(e)=>setPrix(e.target.value)}/><br/>
+            <label htmlFor="nombre"><p>Nombre:</p></label>
+           <input type="number" id="nombre" min={0} className="inputClass" value={nombre} onChange={(e)=>setNombre(e.target.value)}/><br/>
            <p>Disponible:</p>
            <label htmlFor="Oui">OUI
-               <input type="radio" id="Oui" name="dispo" value={dispo} onChange={(e)=>setDispo(true)}/>
+               <input type="radio" className="inputRadio" id="Oui" name="dispo" value={dispo} onChange={(e)=>setDispo(true)}/>
           </label>
            <label htmlFor="Non">NON
-               <input type="radio" id="Non" name="dispo" value={dispo} onChange={(e)=>setDispo(false)}/>
+               <input type="radio" className="inputRadio" id="Non" name="dispo" value={dispo} onChange={(e)=>setDispo(false)}/>
            </label><br/>
-           <button type="submit" className="boutonEnregistrer">Enregistrer</button>
+           <button type="submit" className="bouton btnEnregistrer">Enregistrer</button>
+           <button onClick={()=>history.push('/')} className="bouton btnAnnuler">Annuler</button>
         </form>
 
     </div>

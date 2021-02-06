@@ -11,8 +11,8 @@ function App() {
     <Router>
 
        <Switch>
-           <Route exact path="/" component={Enregistrement}/>
-           <Route path="/ListeProduit" component={ListeProduit}/>
+           <Route exact path="/" component={ListeProduit}/>
+           <Route path="/Enregistrement" component={Enregistrement}/>
            <Route path="/EditerProduit/:id" component={EditerProduit}/>
            <Route component={NotFound}/>
        </Switch>
