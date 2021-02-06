@@ -3,13 +3,17 @@ body{
   flex-direction: column;
   align-items: center;
 }
+p{
+  color:orange;
+  margin-bottom: 10px;
+}
 .Conteneur{
   display:flex;
   flex-direction: column;
   border:1px solid black;
-  margin-top: 70px;
+  margin-top: 50px;
   padding: 30px;
-
+  min-width: 500px;
 }
 h1{
   color:blue;
@@ -17,17 +21,23 @@ h1{
   font-weight: 2em;
 }
 .inputClass{
-  margin-top: 20px;
+  margin-top: 10px;
   width:100%;
   height:30px;
 }
-.boutonEnregistrer{
+.bouton{
   margin-top: 30px;
   color:white;
-  background-color: blue;
   width:30%;
   padding: 10px;
+  margin-left: 20px;
   border-style: none;
+}
+.btnEnregistrer{
+  background-color: orange;
+}
+.btnAnnuler{
+  background-color: blue;
 }
 .success{
   color:green;
@@ -40,4 +50,7 @@ h1{
   text-align: center;
   font-family: serif;
   font-size: 1.5em;
+}
+.inputRadio{
+  margin-left: 10px;
 }
