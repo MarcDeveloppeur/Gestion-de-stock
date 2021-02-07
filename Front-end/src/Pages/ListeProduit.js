@@ -38,8 +38,9 @@ function ListeProduit() {
     <table className="tableau">
         <thead>
             <td className="titreTableau">Nom du produit</td>
+            <td className="titreTableau">Unité</td>
             <td className="titreTableau">Prix unitair (Ariary)</td>
-            <td className="titreTableau">Nombre</td>
+            <td className="titreTableau">Nombre d'unité</td>
             <td className="titreTableau">Valeur en stock (Ariary)</td>
             <td className="titreTableau">Disponible</td>
             <td className="titreTableau">Actions</td>
@@ -47,6 +48,7 @@ function ListeProduit() {
         <tbody>
              {produits.map((product,index)=><tr key={index}>
                <td>{product.nom}</td>
+               <td>{product.unite}</td>
                <td>{product.prix}</td>
                <td>{product.nombre}</td>
                <td>{product.nombre*product.prix}</td>

@@ -16,9 +16,10 @@ p{
   min-width: 500px;
 }
 h1{
-  color:blue;
+  color:purple;
   font-family: sans-serif;
-  font-weight: 2em;
+  font-size: 2em;
+  text-align: center;
 }
 .inputClass{
   margin-top: 10px;
@@ -37,7 +38,7 @@ h1{
   background-color: orange;
 }
 .btnAnnuler{
-  background-color: blue;
+  background-color: green;
 }
 .success{
   color:green;
@@ -53,4 +54,7 @@ h1{
 }
 .inputRadio{
   margin-left: 10px;
+}
+.desc{
+  height:90px;
 }

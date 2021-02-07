@@ -8,6 +8,7 @@ function EditerProduit(props) {
     const [prix,setPrix]=useState();
     const [nombre,setNombre]=useState();
     const [dispo,setDispo]=useState(false);
+    const [unite,setUnite]=useState('');
     const [message,setMessage]=useState('');
     const [messageClasse,setMessageClasse]=useState('');
     const history=useHistory();
@@ -20,6 +21,7 @@ function EditerProduit(props) {
         setPrix(res.data.prix);
         setNombre(res.data.nombre);
         setDispo(res.data.estDispo);
+        setUnite(res.data.unite);
       })
     },[]);
 
@@ -30,7 +32,8 @@ function EditerProduit(props) {
           nom:nom,
           prix:prix,
           nombre:nombre,
-          estDispo:dispo
+          estDispo:dispo,
+          unite:unite
         }
         axios.put('http://localhost:5000/product/update/'+props.match.params.id,data)
         .then(()=>{
@@ -58,6 +61,20 @@ function EditerProduit(props) {
         <form onSubmit={enregistrer}>
            <label htmlFor="nom"><p>Nom du produit:</p></label>
            <input type="text" id="nom" placeholder="Nom du produit" className="inputClass" value={nom} onChange={(e)=>setNom(e.target.value)}/><br/>
+           <label htmlFor="unite"><p>Unité:</p></label>
+           <select onChange={(e)=>setUnite(e.target.value)} id="unite" className="inputClass">
+               <optGroup label="Pièce">
+                   <option value="Pièce">Pièce</option>
+              </optGroup>
+              <optGroup label="Poids">
+                   <option value="Tonne">Tonne</option>
+                   <option value="Kilogramme">Kilogramme</option>
+                   <option value="Gramme">Gramme</option>
+              </optGroup>
+              <optGroup label="Liquide">
+                   <option value="Littre">Littre</option>
+              </optGroup>
+          </select>
            <label htmlFor="prix"><p>Prix unitair (Ariary):</p></label>
            <input type="number" id="prix" placeholder="Prix unitaire" min={0} className="inputClass" value={prix} onChange={(e)=>setPrix(e.target.value)}/><br/>
            <label htmlFor="nombre"><p>Nombre:</p></label>
