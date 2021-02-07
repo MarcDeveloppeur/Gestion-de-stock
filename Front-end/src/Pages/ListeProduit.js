@@ -7,13 +7,17 @@ function ListeProduit() {
    const [produits,setProduits]=useState([]);
    const [total,setTotal]=useState(0);
    const history=useHistory();
-    //Afficher la liste des produits lorsque la page est chargé
-    useEffect(()=>{
 
+    useEffect(()=>{
+  //Afficher la liste des produits lorsque la page est chargé
       axios.get('http://localhost:5000/product/getAll')
       .then((resultat)=>{
         setProduits(resultat.data);
-        calculeTotal();
+      });
+   //la valeur totale du stock
+      axios.get('http://localhost:5000/product/total')
+      .then((resultat)=>{
+        resultat.data[0] && setTotal(resultat.data[0].total);
       });
     },[]);
     //supprimer le produit
@@ -21,20 +25,30 @@ function ListeProduit() {
       axios.delete('http://localhost:5000/product/deleteOne/'+id)
       .then(()=>{
         setProduits(produits.filter((produit)=>produit._id!==id));
-      })
-    }
-    //calculer le montant total du stock
-    const calculeTotal=()=>{
-      const prixTotal=0;
-      produits.forEach((produit, i) => {
-        prixTotal+=produit.prix;
+        //mettre à jours le total apres la suppression d'un produit
+        axios.get('http://localhost:5000/product/total')
+        .then((resultat)=>{
+          resultat.data[0]?setTotal(resultat.data[0].total):setTotal(0);
+        });
+
       });
-      setTotal(prixTotal);
-    }
+      }
+
 
   return (
     <div className="ListeConteneur">
-    <h1 className="title">La liste de tous les produits</h1>
+    <h1 className="title">La liste de tous les produits en stock</h1>
+    <div className="HeadBlock">
+        <button className="lien" onClick={()=>history.push('/Enregistrement')}>Enregistrer un nouveau produit</button>
+        <table className="tableau">
+           <thead>
+               <td className="titreTableau">Valeur total du stock (Ariary)</td>
+           </thead>
+           <tbody>
+              <td className="nombre">{total}</td>
+           </tbody>
+        </table>
+    </div>
     <table className="tableau">
         <thead>
             <td className="titreTableau">Nom du produit</td>
@@ -49,9 +63,9 @@ function ListeProduit() {
              {produits.map((product,index)=><tr key={index}>
                <td>{product.nom}</td>
                <td>{product.unite}</td>
-               <td>{product.prix}</td>
-               <td>{product.nombre}</td>
-               <td>{product.nombre*product.prix}</td>
+               <td className="nombre">{product.prix}</td>
+               <td className="nombre">{product.nombre}</td>
+               <td className="nombre">{product.valeurEnStock}</td>
                <td>{product.estDispo?"OUI":"NON"}</td>
                <td>
                    <button className="boutonAction modif" onClick={()=>{
@@ -68,15 +82,7 @@ function ListeProduit() {
              </tr>)}
         </tbody>
     </table>
-    <table className="tableau">
-       <thead>
-           <td className="titreTableau">Montant total (Ariary)</td>
-       </thead>
-       <tbody>
-          <td>{total}</td>
-       </tbody>
-    </table>
-     <button className="lien" onClick={()=>history.push('/Enregistrement')}>Enregistrer un nouveau produit</button>
+
     </div>
   );
 }

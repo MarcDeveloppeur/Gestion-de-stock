@@ -33,7 +33,8 @@ function EditerProduit(props) {
           prix:prix,
           nombre:nombre,
           estDispo:dispo,
-          unite:unite
+          unite:unite,
+          valeurEnStock:prix*nombre
         }
         axios.put('http://localhost:5000/product/update/'+props.match.params.id,data)
         .then(()=>{
