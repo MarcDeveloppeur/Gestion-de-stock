@@ -49,3 +49,8 @@ exports.getOne=(req,res)=>{
    }).catch((err)=>console.log(err));
 
 }
+exports.total=(req,res)=>{
+  //la somme de toutes les valeurs en stock et retourner le total des valeurs
+  productModel.aggregate([{$group:{_id:"",total:{$sum:"$valeurEnStock"}}}])
+  .then((result)=>res.status(200).send(result));
+}

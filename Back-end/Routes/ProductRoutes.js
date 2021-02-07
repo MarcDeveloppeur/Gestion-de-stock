@@ -12,4 +12,6 @@ router.get('/getOne/:id',productControllers.getOne);
 router.delete('/deleteOne/:id',productControllers.deleteOne);
 //mettre à jours un produit
 router.put('/update/:id',productControllers.update);
+//avoir le montant total du stock
+router.get('/total',productControllers.total);
 module.exports=router;

@@ -33,6 +33,7 @@ h1{
   padding: 10px;
   margin-left: 20px;
   border-style: none;
+  cursor: pointer;
 }
 .btnEnregistrer{
   background-color: orange;

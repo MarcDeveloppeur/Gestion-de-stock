@@ -7,7 +7,7 @@ function Enregistrement() {
     const [nom,setNom]=useState("");
     const [prix,setPrix]=useState();
     const [nombre,setNombre]=useState();
-    const [dispo,setDispo]=useState(false);
+    const [dispo,setDispo]=useState(true);
     const [unite,setUnite]=useState('Pièce');
     const [message,setMessage]=useState('');
     const [messageClasse,setMessageClasse]=useState('');
@@ -21,7 +21,8 @@ function Enregistrement() {
           prix:prix,
           nombre:nombre,
           estDispo:dispo,
-          unite:unite
+          unite:unite,
+          valeurEnStock:prix*nombre
         }
         axios.post('http://localhost:5000/product/addNew',data)
         .then(()=>{
